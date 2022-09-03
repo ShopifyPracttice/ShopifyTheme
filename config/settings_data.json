@@ -1,5 +1,90 @@
 {
-  "current": "Default",
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "anounce_text": "Welcome to our store"
+        }
+      },
+      "image-banner": {
+        "type": "image-banner",
+        "blocks": {
+          "0ee572c2-952d-4ebf-b0f7-ddb3c4a141c3": {
+            "type": "heading",
+            "settings": {
+              "heading": "Image banner"
+            }
+          },
+          "d04d547f-f682-416b-8243-e0567f89f4b9": {
+            "type": "text",
+            "settings": {
+              "text": "Give customers details about the banner image(s) or content on the template."
+            }
+          },
+          "74dc9664-f44b-460f-920d-28147d36022f": {
+            "type": "buttons",
+            "settings": {
+              "button": "Shop All",
+              "button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "0ee572c2-952d-4ebf-b0f7-ddb3c4a141c3",
+          "d04d547f-f682-416b-8243-e0567f89f4b9",
+          "74dc9664-f44b-460f-920d-28147d36022f"
+        ],
+        "settings": {
+          "first_image": "shopify:\/\/shop_images\/accessories-collection.png",
+          "second_image": "shopify:\/\/shop_images\/rack-of-womens-clothing.jpg",
+          "color": "#000",
+          "background_color": "#fff"
+        }
+      },
+      "rich-text": {
+        "type": "rich-text",
+        "blocks": {
+          "e754e090-811c-4657-af65-52a16a78abd3": {
+            "type": "heading",
+            "settings": {
+              "heading": "Image banner"
+            }
+          },
+          "042559e6-754d-4231-90f7-7ecb4d941f86": {
+            "type": "text",
+            "settings": {
+              "text": "Give customers details about the banner image(s) or content on the template."
+            }
+          },
+          "deb56f01-eed6-4138-b5e9-07e803e55b84": {
+            "type": "buttons",
+            "settings": {
+              "button": "Shop All",
+              "button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "e754e090-811c-4657-af65-52a16a78abd3",
+          "042559e6-754d-4231-90f7-7ecb4d941f86",
+          "deb56f01-eed6-4138-b5e9-07e803e55b84"
+        ],
+        "settings": {
+        }
+      },
+      "collection": {
+        "type": "collection",
+        "settings": {
+          "headings": "Collection",
+          "collection": "featured-collection"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
   "presets": {
     "Default": {
     }
