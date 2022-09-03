@@ -1,0 +1,100 @@
+<div class="rich-text">
+{% for block in section.blocks %}
+       {%- case block.type -%}
+         {%- when 'heading' -%}
+    <h1 class="Heading">{{ block.settings.heading }}</h1>
+         {%- when 'text' -%}
+    <p class="text">{{ block.settings.text }}</p>
+         {%- when 'buttons' -%}
+    <a href="{{ block.settings.button_link }}">{{ block.settings.button }}</a>
+              {%- endcase -%}
+         {% endfor %}
+</div>
+
+
+{% schema %}
+{
+    "name": "Rich Text",
+    "settings": [],
+    "blocks":[
+    {
+        "type": "heading",
+        "name": "Heading",
+        "limit": 1,
+        "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "default": "Image banner",
+            "label": "Heading"
+        }
+    ]    
+    },
+    {
+        "type": "text",
+        "name": "Customer Details",
+        "limit": 1,
+        "settings": [
+        {
+            "type": "text",
+            "id": "text",
+            "default": "Give customers details about the banner image(s) or content on the template.",
+            "label": "text"
+        }
+        ]
+    },
+    {
+        "type": "buttons",
+        "name": "Buttons",
+        "limit": 1,
+        "settings": [
+   {
+            "type": "text",
+            "id": "button",
+            "default": "Shop All",
+            "label": "Button"
+        }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "URL"
+        }
+    ]
+    }
+    ]
+}
+{% endschema %}
+{% style %}
+.rich-text{
+    width: 100%;
+    height: auto;
+    display: grid;
+    padding:  30px 0;
+    grid-template-columns: auto;
+    background: #eee;
+    place-items: center;
+    }
+    .Heading{
+    width: 80%;
+    font-size: 35px;
+    place-items: center;
+    text-align: center;
+    margin-top: 20px;
+    }
+    .text{
+    width: 70%;
+    font-size: 20px;
+    text-align: center;
+    }
+    .rich-text a{
+    color: white;
+    background-color: black;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 1;
+    padding: 15px;
+    text-decoration: none;
+    transition: all 1s linear;
+    }
+{% endstyle %}

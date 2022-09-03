@@ -1,0 +1,198 @@
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="{{ section.settings.first_image | image_url }}" alt=""></div>
+        <div class="swiper-slide"><img src="{{ section.settings.second_image | image_url }}" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        </div>
+    
+  <div class="text-section">
+    <div class="text-wrapper">
+    {% for block in section.blocks %}
+       {%- case block.type -%}
+         {%- when 'heading' -%}
+    <h1>{{ block.settings.heading }}</h1>
+         {%- when 'text' -%}
+    <p>{{ block.settings.text }}</p>
+         {%- when 'buttons' -%}
+    <a href="{{ block.settings.button_link }}">{{ block.settings.button }}</a>
+              {%- endcase -%}
+         {% endfor %}
+    </div>
+  </div>
+  {% schema %}
+  {
+	"name": "Image Banner",
+	"settings": [{
+			"type": "image_picker",
+			"id": "first_image",
+			"label": "First Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "second_image",
+			"label": "Second Image"
+		},
+		{
+			"type": "color",
+			"id": "color",
+			"label": "Button Color",
+			"default": "#000"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Button Background Color",
+			"default": "#fff"
+		}
+	],
+	"blocks": [{
+			"type": "heading",
+			"name": "Heading",
+			"limit": 1,
+			"settings": [{
+				"type": "text",
+				"id": "heading",
+				"default": "Image banner",
+				"label": "Heading"
+			}]
+		},
+		{
+			"type": "text",
+			"name": "Customer Details",
+			"limit": 1,
+			"settings": [{
+				"type": "text",
+				"id": "text",
+				"default": "Give customers details about the banner image(s) or content on the template.",
+				"label": "text"
+			}]
+		},
+		{
+			"type": "buttons",
+			"name": "Buttons",
+			"limit": 1,
+			"settings": [
+      {
+				"type": "text",
+				"id": "button",
+				"default": "Shop All",
+				"label": "Button"
+			}, {
+				"type": "url",
+				"id": "button_link",
+				"label": "URL"
+			}
+      ]
+		}
+	]
+}
+{% endschema %}
+   {% style %}
+
+   body{
+    font-family: poppins;
+   }
+   .swiper {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+.text-section{
+    width: auto;
+    height: auto;
+    padding: 50px;
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    z-index: 9;
+  }
+  .text-wrapper{
+    width: 70%;
+    height: auto;
+    display: grid;
+    place-items: center;
+  }
+  .text-section h1{
+    font-size: 35px;
+    text-align: center;
+    color: #000; 
+    font-weight: bold;  
+    font-weight: 500;
+  }
+  .text-section p{
+     color: #111;
+    text-align: center;
+     opacity: 0.8;
+     font-weight: 600;
+     max-height: 100px;
+     overflow: hidden;
+    font-size: 20px;
+  }
+  .text-section a{
+    width: 100px;
+    height: 50px;
+    display: grid;
+    text-decoration: none;
+    color: {{ section.settings.color }};
+    place-items: center;
+    background: {{ section.settings.background_color }};
+  }
+  @media screen and (max-width: 1060){
+    .swiper{ width: 80%;
+    height: 500px;
+    display: flex;
+    scroll-behavior: smooth;
+    }
+    .swiper-slide{
+      width: 80%;
+      display: flex;
+      height: 500px;
+    }
+  }
+    {% endstyle %}
+  {% javascript %}
+  var swiper = new Swiper(".mySwiper", {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  })
+  {% endjavascript %}
