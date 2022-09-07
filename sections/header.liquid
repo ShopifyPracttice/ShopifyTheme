@@ -41,10 +41,10 @@
     </div>
     <div class="cart-sec">
     <form action="/search" method="get" role="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
+       <a href="/search"><i class="fa-solid fa-magnifying-glass"></i></a>
         <input type="text" id="search-item" placeholder="Search" onkeyup="search()">
     </form>
-     <a href="/cart"><i class="fa-solid fa-cart-shopping"><span aria-hidden="true">{{ cart.item_count }}</span></i></a>
+     <button id="cart"><i class="fa-solid fa-cart-shopping"></i><span aria-hidden="true">({{ cart.item_count }})</span></button>
     </div>
     </div>
 </div>
@@ -97,14 +97,14 @@ body{
     background: #eee;
     justify-content: space-around;
 }
-form{
+.cart-sec form{
     width: 250px;
     border: 1px solid #000;
     border-radius: 4px;
     background: #fff;
     border-radius: 20px;
 }
-form input{
+.cart-sec form input{
     border: none;
     outline: none;
     box-shadow: none;
@@ -113,8 +113,9 @@ form input{
     font-weight: 600;
     padding: 8px 18px;
 }
-form i{
+.cart-sec form i{
     padding-left: 10px;
+    font-size: 20px;
 }
 .link-list{
     width: 300px;
@@ -124,22 +125,34 @@ form i{
 .link-list a{
  text-decoration: none;
  letter-spacing: 2px;
+ transition: all 3s linear;
+}
+.link-list a:hover{
+  text-decoration: underline;
+  transition: all 3s linear;
 }
 .cart-sec{
     width: 350px;
     display: flex;
     justify-content: space-between;
 }
-.cart-sec a{
+.cart-sec button{
     font-size: 25px;
     color: #000;
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
 .hamburger{
     display: none;
 }
-.cart-sec a span{
+.anouncement-prt h3{
+  text-align: center;
+}
+.cart-sec  span{
     font-size: 16px;
     margin-left: 10px;
+    cursor: pointer;
 }
 .res-list{
     display: none;
@@ -167,7 +180,7 @@ letter-spacing: 2px;
         width: 150px;
     }
      .cart-sec form input{
-        width: 80px;
+        width: 60px;
      }
      .res-list{
         display: block;
@@ -208,7 +221,8 @@ letter-spacing: 2px;
         cursor: pointer;
      }
      .anouncement-prt h3{
-        font-size: 10px;
+        font-size: 13px;
+        text-align: center;
      }
 }
 

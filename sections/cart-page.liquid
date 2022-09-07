@@ -1,0 +1,272 @@
+{% if cart.item_count > 0 %}
+  <div class="head-part">
+  <h1> Your Cart</h1>
+    <a href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
+  </div>
+  <form action="/cart" method="post" novalidate>
+    <section class="cart-up">
+  <div class="head">
+  <div class="f-head">
+  <p>Product</p>
+  </div>
+  <div class="s-head">
+  <p class="qt">Quantity</p>
+  <p class="tt">Total</p>
+  </div>
+  </div> 
+    </section>
+  <table>
+<!--       <thead>
+        <th colspan="2">Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </thead> -->
+      <section class="cart-down">
+        {% for item in cart.items %}
+          <div class="cd-container">
+            <div class="product-info">
+            <div class="product-img">
+              <a href="{{ item.url | within: collections.all }}">
+                <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
+              </a>
+            </div>
+              
+            <div class="info">
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+              {{ item.price | money }}
+              <p> Size: {{ item.variant.title }}</p>
+             </div>
+            </div>
+            <div class="product-detail">
+            <div class="details">
+              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><i class="fas fa-trash"></i></a>
+              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+              {{ item.price | money }}
+              {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+            </div>
+            </div>
+          </div>
+        {% endfor %}
+      </section>
+    </table>
+    <div class="price-section">
+    <div class="price">
+      <p>sub total : {{ cart.total_price | money }}</p>
+      <span>Taxes and shipping calculated at checkout</span>
+      <button class="update" type="submit" name="update">Update Your WishList </button>
+      <button class="checkout" type="submit" name="checkout">Checkout</button>
+    </div>
+    </div>
+  </form>
+{% else %}
+<div class="empty-cart">
+  <h1>cart</h1>
+ <p> Your Cart is empty please add any thing to your cart</p>
+  <a href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": []
+  }
+{% endschema %}
+
+{% style %}
+  .head-part{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .head-part h1 {
+    font-size: 35px;
+    font-weight: 200;
+  }
+  .head-part a{
+    text-decoration: underline;
+    font-weight: 200;
+  }
+  .cart-up{
+    width: 100%;
+    height: 70px;
+        display: grid;
+    place-items: center; 
+  }
+  .head{
+    width: 90%;
+    height: 70px;
+    display: flex;
+    place-items: center;
+    border-bottom: 1px solid #eee;
+  }
+  .f-head{
+    width: 50%;
+    height: 70px;
+      display: flex;
+     justify-content: flex-start;
+    align-items: center;
+    
+  }
+  .head-part a{
+    font-size: 22px;
+    color: #222;
+    text-decoration: none;
+  }
+  .s-head{
+    width: 50%;
+    display: flex;
+     justify-content: flex-end;
+    align-items: center;
+  }
+ .qt{
+    margin-right: 200px;
+  }
+/*   .tt{
+    margin-left: 20px;
+  } */
+  .cart-down{
+    width: 100%;
+    height: auto;
+    display: grid;
+    place-items: center;
+  }
+  .cd-container{
+    width: 90%;
+    height: auto;
+    display: flex;
+    padding: 80px 0;
+    place-items: center;
+    border-bottom: 1px solid #eee;
+  }
+  .product-info{
+      width: 45%;
+    height: auto;
+      display: flex;
+     justify-content: flex-start;
+    align-items: center;
+  }
+  .info{
+    padding-left: 10px;
+    display: grid;
+    height: auto;
+  }
+  .info a{
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+  }
+  .product-detail{
+       width: 50%;
+    display: flex;
+     justify-content: flex-end;
+    align-items: center;
+  }
+  .details{
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .details input{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .details a{
+    font-size: 22px;
+    color: #222;
+    text-decoration: none;
+  }
+  .price-section{
+    height: auto;
+    padding: 50px 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .price{
+    width: 300px;
+    height: auto;
+    padding: 30px 0;
+  }
+  .price p{
+    font-size: 23px;
+    text-transform: capitalize;
+    color: #000;
+    font-weight: 500;
+  }
+  .price span{
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+  }
+  .update{
+    width: 250px;
+    height: 50px;
+    background: #fff;
+    color: #000;
+    font-size: 20px;
+    border: 1px solid #000;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: all 0.3s linear;
+  }
+  .update:hover{
+    opacity: 0.7;
+  }
+.checkout{
+   width: 250px;
+    height: 50px;
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+  transition: all 0.3s linear;
+}
+  .checkout:hover{
+    opacity: 0.7;
+  }
+  .empty-cart{
+    width: 80%;
+    height: auto;
+    padding: 20px;
+    display: grid;
+    place-items: center;
+  }
+  .empty-cart h1{
+    font-size: 50px;
+    text-transform: capitalize;
+  }
+  .empty-cart p{
+    font-size: 30px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .empty-cart a{
+    font-size: 30px;
+    text-align: center;
+    color: #444;
+  }
+  @media screen and (max-width: 550px){
+    .qt{
+      margin-right: 80px;
+    }
+    .product-detail{
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+ }
+  }
+{% endstyle %}
+
+{% javascript %}
+{% endjavascript %}

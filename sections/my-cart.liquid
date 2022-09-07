@@ -1,0 +1,66 @@
+<div class="my_cart">
+    <div class="cart-header">
+    <h2>Cart</h2>
+    <i class="fa-solid fa-xmark" id="close-cart"></i>
+    </div>
+    <div class="myCart__items">
+        {% for item in cart.items %}
+        <div><a href="{{ item.url }}">{{ item.title }}</a></div>
+        <div>Price: {{ item.price | money }}</div>
+        <div>Quantity:
+            <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity{{ item.quantity | minus : 1 }}">Minus</a>
+            {{ item.quantity }}
+            <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity{{ item.quantity | plus : 1 }}">Plus</a>
+        </div>
+        <div>Total: {{ item.final_line_price | money }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% style %}
+    .my_cart{
+        width: auto;
+        height: auto;
+        background: #fff;
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: block;
+        padding: 30px;
+        z-index: 10;
+        transform: translate( 100%);
+        transition: all 0.3s linear;
+    }
+    .cart-header{
+        height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .show-cart{
+        transform: translate(0);
+    }
+    .myCart__items{
+        border-bottom: 1px solid #eee;
+    }
+    #close-cart{
+        cursor: pointer;
+    }
+{% endstyle %}
+{% javascript %}
+const cartButton = document.querySelector("#cart");
+const addToCart = document.querySelector("#AddToCart");
+const cartContainer = document.querySelector(".my_cart");
+const closeCart = document.querySelector("#close-cart");
+cartButton.addEventListener("click", function(){
+    cartContainer.classList.add("show-cart");
+} );
+closeCart.addEventListener("click", function(){
+    cartContainer.classList.remove("show-cart")
+});
+addToCart.addEventListener("click", function(){
+    cartContainer.classList.add("show-cart");
+} );
+closeCart.addEventListener("click", function(){
+    cartContainer.classList.remove("show-cart")
+});
+{% endjavascript %}
